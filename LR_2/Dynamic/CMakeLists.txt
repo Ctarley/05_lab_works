@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.6)
+cmake_minimum_required (VERSION 3.5)
 project (lr2_dynamic)
 
 add_compile_options(-std=c++11)

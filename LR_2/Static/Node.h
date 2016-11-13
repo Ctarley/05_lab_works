@@ -4,8 +4,8 @@
 #include <malloc.h>
 #include <cstdio>
 #include <cstdlib>
-#include <Windows.h>
-#include <Winbase.h>
+//#include <Windows.h>
+//#include <Winbase.h>
 
 struct node
 {
@@ -14,6 +14,9 @@ struct node
 	node* left;
 	node* right;
 };
+
+#include <sys/time.h>
+
 
 
 void tree_insert(node* root, int key);

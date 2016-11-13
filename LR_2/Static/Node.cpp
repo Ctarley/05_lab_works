@@ -1,16 +1,23 @@
 #include "Node.h"
 
+unsigned long GetTickCount()
+{
+    struct timeval tv;
+    gettimeofday(&tv,NULL);
+    return (tv.tv_sec*1000+tv.tv_usec/1000);
+} 
+
 void tree_insert(node* root, int key)
 {
 	if (root->key == key)
 	{
 		return;
 	}
-	DWORD time = GetTickCount();
+	unsigned int  time = GetTickCount();
 	if (key < root->key)
 	{
-		if (GetTickCount() - time > 0x64)
-			return;
+		//if (GetTickCount() - time > 0x64)
+		//	return;
 		if (root->left == NULL)
 			root->left = node_create(key);
 		if ((root->left->key < key) && (!root->right))

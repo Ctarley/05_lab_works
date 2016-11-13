@@ -1,6 +1,13 @@
 #include <iostream>
 
-#include <Windows.h>
+//#include <Windows.h>
+#include <sys/time.h>
+unsigned long GetTickCount()
+{
+    struct timeval tv;
+    gettimeofday(&tv,NULL);
+    return (tv.tv_sec*1000+tv.tv_usec/1000);
+} 
 
 using namespace std;
 
@@ -13,23 +20,38 @@ int main(int argc, char const *argv[])
 	int choise;
 	int module;
 	int action;
+	//For tests
+	int test = 0;
+	if ((argv[1]) && (atoi(argv[1]) == 1))
+	{
+		test = 1;
+		size = atoi(argv[2]);
+		choise = atoi(argv[3]);
+		module = atoi(argv[4]);
+		action = atoi(argv[5]);
+	}
+	
 
 	cout << "Input size of array:";
+	if (!test)
+		cin >> size;
 
-	cin >> size;
 	int *arr = new int[size];
 
 	cout << "Choose the method of filling:" << endl;
 	cout << "1.Random filling" << endl;
 	cout << "2.Hand filling" << endl;
-	cin >> choise;
+
+	if (!test)
+		cin >> choise;
 
 	switch (choise)
 	{
 	case 1:
 	{
 		cout << "Choose the module:";
-		cin >> module;
+		if (!test)
+			cin >> module;
 
 		for (int i = 0; i < size; ++i)
 			arr[i] = rand() % module;
@@ -58,7 +80,8 @@ int main(int argc, char const *argv[])
 		cout << "2.Print array" << endl;
 		cout << "3.Exit" << endl;
 
-		cin >> action;
+		if (!test)
+			cin >> action;
 
 		switch (action)
 		{
@@ -68,15 +91,16 @@ int main(int argc, char const *argv[])
 			mergeSort(arr, size);
 			time = GetTickCount() - time;
 			cout << time;
-			break;
+			if (!test)
+				break;
 		}
 
 		case 2:
 		{
 			for (auto i = 0; i < size; ++i)
 				cout << arr[i] << ",";
-
-			break;
+			if (!test)
+				break;
 		}
 
 		case 3:
